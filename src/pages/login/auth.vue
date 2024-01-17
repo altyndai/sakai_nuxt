@@ -1,14 +1,27 @@
 <script lang="ts" setup>
-definePageMeta({
-  layout: 'empty'
-});
+import axios from "axios";
+import {useUserStore} from "~/stores/useUserStore";
+import {useAuthStore} from "~/stores/useAuthStore";
 
+definePageMeta({
+  layout: 'login'
+});
+const router = useRouter()
 const { $appState } = useNuxtApp();
 
-const email = ref('');
-const password = ref('');
-const checked = ref(false);
 
+const model = ref({
+  email: 'altyndai@gmail.com',
+  password: 'Altyndai@003',
+  checked: false
+})
+
+const userStore = useUserStore()
+const authStore = useAuthStore()
+const submit = async () => {
+    authStore.login(model.value)
+  router.push('/login/register')
+}
 const logoColor = computed(() => ($appState.darkTheme ? 'white' : 'dark'));
 </script>
 
@@ -32,7 +45,7 @@ const logoColor = computed(() => ($appState.darkTheme ? 'white' : 'dark'));
             <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
             <InputText
               id="email1"
-              v-model="email"
+              v-model="model.email"
               type="text"
               class="w-full mb-3"
               placeholder="Email"
@@ -42,7 +55,7 @@ const logoColor = computed(() => ($appState.darkTheme ? 'white' : 'dark'));
             <label for="password1" class="block text-900 font-medium text-xl mb-2">Password</label>
             <Password
               id="password1"
-              v-model="password"
+              v-model="model.password"
               placeholder="Password"
               :toggle-mask="true"
               class="w-full mb-3"
@@ -52,12 +65,12 @@ const logoColor = computed(() => ($appState.darkTheme ? 'white' : 'dark'));
 
             <div class="flex align-items-center justify-content-between mb-5">
               <div class="flex align-items-center">
-                <Checkbox id="rememberme1" v-model="checked" :binary="true" class="mr-2" />
+                <Checkbox id="rememberme1" v-model="model.checked" :binary="true" class="mr-2" />
                 <label for="rememberme1">Remember me</label>
               </div>
               <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Forgot password?</a>
             </div>
-            <Button label="Sign In" class="w-full p-3 text-xl" />
+            <Button @click="submit" label="Sign In" class="w-full p-3 text-xl" />
           </div>
         </div>
       </div>

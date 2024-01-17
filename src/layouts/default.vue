@@ -23,9 +23,14 @@ export default defineComponent({
       menu: [
         {
           label: 'Home',
-          items: [{
-            label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/'
-          }]
+          items: [
+              {
+                  label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/'
+              },
+              {
+                label: 'Test', icon: 'pi pi-fw pi-home', to: '/test/test'
+              }
+          ]
         },
         {
           label: 'UI Components',

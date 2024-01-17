@@ -38,7 +38,8 @@ export default defineNuxtConfig({
     'primeicons/primeicons.css',
     'prismjs/themes/prism-coy.css',
     '~/assets/styles/layout.scss',
-    '~/assets/demo/flags/flags.css'
+    '~/assets/demo/flags/flags.css',
+    'primevue/resources/themes/lara-light-green/theme.css'
   ],
 
   dir: {
